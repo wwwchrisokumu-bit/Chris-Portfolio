@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chris Okumu Diang'a | Freelance Web Developer</title>
+    <meta name="description" content="Chris Okumu Diang'a - Freelance Web Developer creating beautiful, functional websites">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: '#0f172a',
+                        accent: '#3b82f6',
+                        'accent-hover': '#2563eb',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+        .skill-bar {
+            transition: width 1.5s ease-out;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-primary text-white font-sans antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="text-2xl font-bold font-serif tracking-tight">
+                    <span class="text-accent"><b>Chris' Portfolio</b></span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link relative text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="nav-link relative text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#services" class="nav-link relative text-sm font-medium text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#portfolio" class="nav-link relative text-sm font-medium text-gray-300 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#skills" class="nav-link relative text-sm font-medium text-gray-300 hover:text-white transition-colors">Skills</a>
+                    <a href="#contact" class="px-6 py-2.5 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-all transform hover:scale-105">Let's Talk</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect border-t border-gray-800">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#home" class="block text-gray-300 hover:text-white font-medium">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-white font-medium">About</a>
+                <a href="#services" class="block text-gray-300 hover:text-white font-medium">Services</a>
+                <a href="#portfolio" class="block text-gray-300 hover:text-white font-medium">Portfolio</a>
+                <a href="#skills" class="block text-gray-300 hover:text-white font-medium">Skills</a>
+                <a href="#contact" class="block text-accent font-medium">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Background Blobs -->
+        <div class="blob w-96 h-96 bg-blue-500 rounded-full top-20 -left-48 animate-pulse-slow"></div>
+        <div class="blob w-80 h-80 bg-purple-500 rounded-full bottom-20 -right-40 animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="blob w-64 h-64 bg-pink-500 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-slow" style="animation-delay: 4s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-gray-300">Available for freelance work</span>
+                    </div>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold font-serif leading-tight mb-6">
+                        Hi, I'm <span class="gradient-text">Chris</span><br>
+                        <span id="typing-text" class="text-white"></span><span class="animate-pulse">|</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        I craft beautiful, functional websites that help businesses grow and make lasting impressions. Let's build something amazing together.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#portfolio" class="px-8 py-4 bg-accent hover:bg-accent-hover text-white font-medium rounded-full transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                            View My Work
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#contact" class="px-8 py-4 glass-effect hover:bg-white/10 text-white font-medium rounded-full transition-all flex items-center justify-center gap-2">
+                            Get In Touch
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="flex items-center gap-6 justify-center lg:justify-start mt-10">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="github" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="linkedin" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="dribbble" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="relative hidden lg:block animate-float">
+                    <div class="relative w-full max-w-lg mx-auto">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl blur-3xl"></div>
+                        <img src="https://cheap-blush-cosikbgfzm.edgeone.app/5940583397447109893_121.jpg" alt="Chris Okumu" class="relative rounded-3xl shadow-2xl w-full object-cover h-[500px]"   
+                        <!-- Floating Cards -->
+                        <div class="absolute -left-8 top-1/4 glass-effect rounded-2xl p-4 animate-slide-in-left" style="animation-delay: 0.5s;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-6 h-6 text-green-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">Projects Completed</p>
+                                    <p class="text-2xl font-bold">50+</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute -right-8 bottom-1/4 glass-effect rounded-2xl p-4 animate-slide-in-right" style="animation-delay: 0.7s;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="users" class="w-6 h-6 text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">Happy Clients</p>
+                                    <p class="text-2xl font-bold">30+</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl opacity-20 blur-2xl"></div>
+                        <img src="https://obvious-plum-ihedi0g78v.edgeone.app/IMG20260402123847.jpg" alt="Working" class="relative rounded-2xl shadow-2xl w-full">
+                        
+                        <!-- Experience Badge -->
+                        <div class="absolute -bottom-6 -right-6 bg-accent rounded-2xl p-6 shadow-xl">
+                            <p class="text-4xl font-bold">5+</p>
+                            <p class="text-sm text-blue-100">Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <p class="text-accent font-medium mb-4">About Me</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold font-serif mb-6">
+                        Crafting Digital Experiences That <span class="gradient-text">Inspire</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        I'm Chris Okumu Diang'a, a passionate freelance web developer based in Kenya. With over 5 years of experience in the industry, I specialize in creating modern, responsive websites that not only look stunning but also deliver exceptional user experiences.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        My approach combines clean code, creative design, and strategic thinking to help businesses establish a strong online presence. Whether you need a simple landing page or a complex web application, I'm here to bring your vision to life.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="code" class="w-6 h-6 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Clean Code</h4>
+                                <p class="text-sm text-gray-400">Well-structured, maintainable code</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="smartphone" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Responsive</h4>
+                                <p class="text-sm text-gray-400">Perfect on all devices</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="zap" class="w-6 h-6 text-pink-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Fast</h4>
+                                <p class="text-sm text-gray-400">Optimized performance</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Secure</h4>
+                                <p class="text-sm text-gray-400">Best security practices</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="blob w-96 h-96 bg-purple-500/30 rounded-full top-0 right-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <p class="text-accent font-medium mb-4">What I Do</p>
+                <h2 class="text-4xl sm:text-5xl font-bold font-serif mb-6">
+                    Services That Drive <span class="gradient-text">Results</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    From concept to launch, I provide comprehensive web development services tailored to your unique needs.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="group glass-effect rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="layout" class="w-8 h-8 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Web Design</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Beautiful, modern designs that capture your brand essence and engage your audience from the first click.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            UI/UX Design
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Wireframing & Prototyping
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Brand Identity
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="group glass-effect rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="code-2" class="w-8 h-8 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Web Development</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Custom websites built with modern technologies, optimized for performance, security, and scalability.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Frontend Development
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Backend Integration
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            CMS Implementation
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="group glass-effect rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-pink-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shopping-cart" class="w-8 h-8 text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">E-Commerce</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Full-featured online stores that convert visitors into customers with seamless shopping experiences.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Shopify Development
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            WooCommerce Setup
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Payment Integration
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="group glass-effect rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="search" class="w-8 h-8 text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">SEO Optimization</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Data-driven SEO strategies that improve your visibility and drive organic traffic to your website.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Technical SEO
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Content Strategy
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Performance Audit
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="group glass-effect rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-yellow-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="smartphone" class="w-8 h-8 text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Mobile-First</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Websites designed and developed with mobile users in mind, ensuring perfect experiences on every device.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Responsive Design
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            PWA Development
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Cross-Browser Testing
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="group glass-effect rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="wrench" class="w-8 h-8 text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Maintenance</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Ongoing support and maintenance to keep your website secure, updated, and performing at its best.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Regular Updates
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Security Monitoring
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+                            Performance Optimization
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <p class="text-accent font-medium mb-4">My Work</p>
+                <h2 class="text-4xl sm:text-5xl font-bold font-serif mb-6">
+                    Featured <span class="gradient-text">Projects</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    A selection of my recent work showcasing my skills in design and development.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 reveal">
+                <button class="filter-btn active px-6 py-2 rounded-full bg-accent text-white font-medium transition-all" data-filter="all">All</button>
+                <button class="filter-btn px-6 py-2 rounded-full glass-effect hover:bg-white/10 text-gray-300 font-medium transition-all" data-filter="web">Web Design</button>
+                <button class="filter-btn px-6 py-2 rounded-full glass-effect hover:bg-white/10 text-gray-300 font-medium transition-all" data-filter="ecommerce">E-Commerce</button>
+                <button class="filter-btn px-6 py-2 rounded-full glass-effect hover:bg-white/10 text-gray-300 font-medium transition-all" data-filter="app">Web Apps</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card group relative rounded-2xl overflow-hidden reveal" data-category="web">
+                    <img src="https://systematic-orange-quiyevmkog.edgeone.app/Screenshot%202026-04-02%20133458.png" alt="Tech Startup Website" class="w-full h-72 object-cover transition-transform duration-500">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-sm font-medium mb-2">Web Design</span>
+                        <h3 class="text-xl font-bold mb-2">TechFlow Startup</h3>
+                        <p class="text-gray-400 text-sm mb-4">Modern landing page for a tech startup with smooth animations.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-colors">View Live</a>
+                            <a href="#" class="px-4 py-2 glass-effect hover:bg-white/10 text-white text-sm font-medium rounded-full transition-colors">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card group relative rounded-2xl overflow-hidden reveal" data-category="ecommerce">
+                    <img src="https://regulatory-lime-bqxunb3yph.edgeone.app/IMG20250215151057.jpg" alt="E-Commerce Store" class="w-full h-72 object-cover transition-transform duration-500">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-sm font-medium mb-2">E-Commerce</span>
+                        <h3 class="text-xl font-bold mb-2">Luxe Fashion Store</h3>
+                        <p class="text-gray-400 text-sm mb-4">Premium e-commerce experience with seamless checkout flow.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-colors">View Live</a>
+                            <a href="#" class="px-4 py-2 glass-effect hover:bg-white/10 text-white text-sm font-medium rounded-full transition-colors">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card group relative rounded-2xl overflow-hidden reveal" data-category="app">
+                    <img src="http://static.photos/finance/640x360/303" alt="Finance Dashboard" class="w-full h-72 object-cover transition-transform duration-500">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-sm font-medium mb-2">Web App</span>
+                        <h3 class="text-xl font-bold mb-2">FinTrack Dashboard</h3>
+                        <p class="text-gray-400 text-sm mb-4">Comprehensive financial analytics dashboard with real-time data.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-colors">View Live</a>
+                            <a href="#" class="px-4 py-2 glass-effect hover:bg-white/10 text-white text-sm font-medium rounded-full transition-colors">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card group relative rounded-2xl overflow-hidden reveal" data-category="web">
+                    <img src="http://static.photos/restaurant/640x360/404" alt="Restaurant Website" class="w-full h-72 object-cover transition-transform duration-500">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-sm font-medium mb-2">Web Design</span>
+                        <h3 class="text-xl font-bold mb-2">Savory Restaurant</h3>
+                        <p class="text-gray-400 text-sm mb-4">Elegant restaurant website with online reservation system.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-colors">View Live</a>
+                            <a href="#" class="px-4 py-2 glass-effect hover:bg-white/10 text-white text-sm font-medium rounded-full transition-colors">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card group relative rounded-2xl overflow-hidden reveal" data-category="app">
+                    <img src="https://net-blush-351pgtbbr3.edgeone.app/IMG-20240116-WA0016.jpg" alt="Learning Platform" class="w-full h-72 object-cover transition-transform duration-500">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-sm font-medium mb-2">Web App</span>
+                        <h3 class="text-xl font-bold mb-2">Chris Cherubim Station</h3>
+                        <p class="text-gray-400 text-sm mb-4">Interactive learning management system with video courses.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-colors">View Live</a>
+                            <a href="#" class="px-4 py-2 glass-effect hover:bg-white/10 text-white text-sm font-medium rounded-full transition-colors">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card group relative rounded-2xl overflow-hidden reveal" data-category="ecommerce">
+                    <img src="https://troubled-maroon-rjp8jbk857.edgeone.app/IMG20250217130521.jpg" alt="Wellness Store" class="w-full h-72 object-cover transition-transform duration-500">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent opacity-0 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-accent text-sm font-medium mb-2">E-Commerce</span>
+                        <h3 class="text-xl font-bold mb-2">Zen Wellness</h3>
+                        <p class="text-gray-400 text-sm mb-4">Holistic wellness e-commerce with subscription features.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-full transition-colors">View Live</a>
+                            <a href="#" class="px-4 py-2 glass-effect hover:bg-white/10 text-white text-sm font-medium rounded-full transition-colors">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 reveal">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-4 glass-effect hover:bg-white/10 text-white font-medium rounded-full transition-all">
+                    View All Projects
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative">
+        <div class="blob w-80 h-80 bg-blue-500/20 rounded-full bottom-0 left-0"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <p class="text-accent font-medium mb-4">My Expertise</p>
+                <h2 class="text-4xl sm:text-5xl font-bold font-serif mb-6">
+                    Skills & <span class="gradient-text">Technologies</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Proficient in modern web technologies and always learning new tools to deliver the best results.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Technical Skills -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="code-2" class="w-6 h-6 text-accent"></i>
+                        Technical Skills
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">HTML/CSS/Tailwind</span>
+                                <span class="text-accent">95%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" style="width: 0%" data-width="95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">JavaScript/TypeScript</span>
+                                <span class="text-accent">90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">React/Next.js</span>
+                                <span class="text-accent">88%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="width: 0%" data-width="88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Node.js/Express</span>
+                                <span class="text-accent">85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Python/Django</span>
+                                <span class="text-accent">80%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full" style="width: 0%" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Database (SQL/NoSQL)</span>
+                                <span class="text-accent">82%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full" style="width: 0%" data-width="82%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Soft Skills -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <i data-lucide="tool" class="w-6 h-6 text-accent"></i>
+                        Tools & Technologies
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-12">
+                        <div class="glass-effect rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="figma" class="w-8 h-8 mx-auto mb-2 text-purple-400"></i>
+                            <span class="text-sm">Figma</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="git-branch" class="w-8 h-8 mx-auto mb-2 text-orange-400"></i>
+                            <span class="text-sm">Git</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="cloud" class="w-8 h-8 mx-auto mb-2 text-blue-400"></i>
+                            <span class="text-sm">AWS</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="container" class="w-8 h-8 mx-auto mb-2 text-blue-400"></i>
+                            <span class="text-sm">Docker</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="server" class="w-8 h-8 mx-auto mb-2 text-green-400"></i>
+                            <span class="text-sm">Linux</span>
+                        </div>
+                        <div class="glass-effect rounded-xl p-4 text-center hover:bg-white/10 transition-colors">
+                            <i data-lucide="workflow" class="w-8 h-8 mx-auto mb-2 text-pink-400"></i>
+                            <span class="text-sm">CI/CD</span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <i data-lucide="users" class="w-6 h-6 text-accent"></i>
+                        Soft Skills
+                    </h3>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Problem Solving</span>
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Communication</span>
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Team Leadership</span>
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Time Management</span>
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Adaptability</span>
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Attention to Detail</span>
+                        <span class="px-4 py-2 glass-effect rounded-full text-sm">Client Relations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <p class="text-accent font-medium mb-4">Testimonials</p>
+                <h2 class="text-4xl sm:text-5xl font-bold font-serif mb-6">
+                    What Clients <span class="gradient-text">Say</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-effect rounded-3xl p-8 reveal">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Chris exceeded all expectations. He delivered a stunning website that perfectly captured our brand identity. His attention to detail and communication throughout the project was exceptional."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="http://static.photos/people/200x200/702" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <p class="font-semibold">Gabriel Ochieng'</p>
+                            <p class="text-sm text-gray-400">CEO, SCOAN University</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-effect rounded-3xl p-8 reveal">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Working with Chris was an absolute pleasure. He transformed our outdated website into a modern, high-converting platform. Our online sales increased by 150% within the first month!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="http://static.photos/people/200x200/702" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <p class="font-semibold">Ernest Odhiambo</p>
+                            <p class="text-sm text-gray-400">Founder, Kandaria Cyber Security Coompany</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-effect rounded-3xl p-8 reveal">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        "Chris is a rare talent who combines technical expertise with creative vision. He built our custom web application on time and within budget. Highly recommended for any web project!"
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="http://static.photos/people/200x200/703" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <p class="font-semibold">Justors Oluoch</p>
+                            <p class="text-sm text-gray-400">Director, Automotive Station</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative">
+        <div class="blob w-96 h-96 bg-blue-500/20 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <p class="text-accent font-medium mb-4">Get In Touch</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold font-serif mb-6">
+                        Let's Build Something <span class="gradient-text">Amazing</span> Together
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Have a project in mind? I'd love to hear about it. Send me a message and let's discuss how we can bring your ideas to life.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="mail" class="w-6 h-6 text-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Email</p>
+                                <a href="www.chrisokumu@gmail.com" class="text-lg font-medium hover:text-accent transition-colors">www.chrisokumu@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="phone" class="w-6 h-6 text-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Phone</p>
+                                <a href="tel:+254703795124" class="text-lg font-medium hover:text-accent transition-colors">+254703795124</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-accent"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Location</p>
+                                <p class="text-lg font-medium">Asembo Rarieda, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <p class="text-sm text-gray-400 mb-4">Follow Me</p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 glass-effect rounded-xl flex items-center justify-center hover:bg-accent transition-colors group">
+                                <i data-lucide="github" class="w-5 h-5 group-hover:text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 glass-effect rounded-xl flex items-center justify-center hover:bg-accent transition-colors group">
+                                <i data-lucide="linkedin" class="w-5 h-5 group-hover:text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 glass-effect rounded-xl flex items-center justify-center hover:bg-accent transition-colors group">
+                                <i data-lucide="twitter" class="w-5 h-5 group-hover:text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 glass-effect rounded-xl flex items-center justify-center hover:bg-accent transition-colors group">
+                                <i data-lucide="dribbble" class="w-5 h-5 group-hover:text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <form id="contact-form" class="glass-effect rounded-3xl p-8">
+                        <div class="grid sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Name</label>
+                                <input type="text" placeholder="Your name" class="w-full px-4 py-3 bg-white/5 border border-gray-700 rounded-xl focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" placeholder="your@email.com" class="w-full px-4 py-3 bg-white/5 border border-gray-700 rounded-xl focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Subject</label>
+                            <input type="text" placeholder="Project inquiry" class="w-full px-4 py-3 bg-white/5 border border-gray-700 rounded-xl focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea rows="5" placeholder="Tell me about your project..." class="w-full px-4 py-3 bg-white/5 border border-gray-700 rounded-xl focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-8 py-4 bg-accent hover:bg-accent-hover text-white font-medium rounded-xl transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2">
+                            Send Message or whatsApp me via +254703795124
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-gray-400 text-sm">
+                    © 2026 Chris Okumu Diang'a. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 glass-effect rounded-xl p-4 transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+        <span id="toast-message">Message sent successfully!</span>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Typing effect
+        const typingText = document.getElementById('typing-text');
+        const words = ['Web Developer', 'UI/UX Designer', 'Freelancer', 'Problem Solver'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        type();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('glass-effect', 'shadow-lg');
+            } else {
+                navbar.classList.remove('glass-effect', 'shadow-lg');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Skill bars animation
+        const skillBars = document.querySelectorAll('.skill-bar');
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.dataset.width;
+                    entry.target.style.width = width;
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // Portfolio filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-accent', 'text-white');
+                    b.classList.add('glass-effect', 'text-gray-300');
+                });
+                btn.classList.remove('glass-effect', 'text-gray-300');
+                btn.classList.add('bg-accent', 'text-white');
+
+                // Filter projects
+                const filter = btn.dataset.filter;
+                
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success toast
+            toastMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Hide toast after 5 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 5000);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
